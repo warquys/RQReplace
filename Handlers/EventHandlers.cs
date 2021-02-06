@@ -19,61 +19,64 @@ namespace RQReplace.Handlers
 
         public void onLeave(Synapse.Api.Events.SynapseEventArguments.PlayerLeaveEventArgs ev)
         {
-            //checks if the player is not a spectator
-            if (ev.Player.RoleType != RoleType.Spectator || ev.Player.RoleType != RoleType.None)
+            if (Plugin.Config.IsEnabled)
             {
-                //this is a random player in the spectator
-                var players = RoleType.Spectator.GetPlayers().Where(x => x.OverWatch == false);
-                var player = players.ElementAt(UnityEngine.Random.Range(0, players.Count()));
-                //here data from the player who left is saved
-                RoleType role = ev.Player.RoleType;
-                uint ammo5 = ev.Player.Ammo5;
-                uint ammo7 = ev.Player.Ammo7;
-                uint ammo9 = ev.Player.Ammo9;
-                float hp = ev.Player.Health;
-                int maxHP = ev.Player.MaxHealth;
-                float ahp = ev.Player.ArtificialHealth;
-                var inventoryItems = ev.Player.Inventory.Items;
-                Vector3 position = ev.Player.Position;
-                float stamina = ev.Player.Stamina;
-                Vector3 scale = ev.Player.Scale;
-
-                Timing.CallDelayed(1f, () =>
+                //checks if the player is not a spectator
+                if (ev.Player.RoleType != RoleType.Spectator || ev.Player.RoleType != RoleType.None)
                 {
-                    player.SendBroadcast(5, Plugin.Config.ReplaceBroadcast);
-                    player.RoleType = role;
-                    player.Position = position;
+                    //this is a random player in the spectator
+                    var players = RoleType.Spectator.GetPlayers().Where(x => x.OverWatch == false);
+                    var player = players.ElementAt(UnityEngine.Random.Range(0, players.Count()));
+                    //here data from the player who left is saved
+                    RoleType role = ev.Player.RoleType;
+                    uint ammo5 = ev.Player.Ammo5;
+                    uint ammo7 = ev.Player.Ammo7;
+                    uint ammo9 = ev.Player.Ammo9;
+                    float hp = ev.Player.Health;
+                    int maxHP = ev.Player.MaxHealth;
+                    float ahp = ev.Player.ArtificialHealth;
+                    var inventoryItems = ev.Player.Inventory.Items;
+                    Vector3 position = ev.Player.Position;
+                    float stamina = ev.Player.Stamina;
+                    Vector3 scale = ev.Player.Scale;
 
-                    if (Plugin.Config.useScale)
-                        player.Scale = scale;
-
-                    if (Plugin.Config.useScale)
-                        player.MaxHealth = maxHP;
-
-                    if (Plugin.Config.useHealth)
-                        player.Health = hp;
-
-                    if (Plugin.Config.useAHP)
-                        player.ArtificialHealth = ahp;
-
-                    if (Plugin.Config.useStamina)
-                        player.Stamina = stamina;
-
-                    if (Plugin.Config.AllowAmmoTransfer)
+                    Timing.CallDelayed(1f, () =>
                     {
-                        player.Ammo5 = ammo5;
-                        player.Ammo7 = ammo7;
-                        player.Ammo9 = ammo9;
-                    }
+                        player.SendBroadcast(5, Plugin.Config.ReplaceBroadcast);
+                        player.RoleType = role;
+                        player.Position = position;
 
-                    if (Plugin.Config.useInventory)
-                    {
-                        player.Inventory.Clear();
-                        foreach (var item in inventoryItems)
-                            player.Inventory.AddItem(item);
-                    }
-                });
-			}
+                        if (Plugin.Config.useScale)
+                            player.Scale = scale;
+
+                        if (Plugin.Config.useScale)
+                            player.MaxHealth = maxHP;
+
+                        if (Plugin.Config.useHealth)
+                            player.Health = hp;
+
+                        if (Plugin.Config.useAHP)
+                            player.ArtificialHealth = ahp;
+
+                        if (Plugin.Config.useStamina)
+                            player.Stamina = stamina;
+
+                        if (Plugin.Config.AllowAmmoTransfer)
+                        {
+                            player.Ammo5 = ammo5;
+                            player.Ammo7 = ammo7;
+                            player.Ammo9 = ammo9;
+                        }
+
+                        if (Plugin.Config.useInventory)
+                        {
+                            player.Inventory.Clear();
+                            foreach (var item in inventoryItems)
+                                player.Inventory.AddItem(item);
+                        }
+                    });
+                }
+            }
 		}
 	} 
 }
