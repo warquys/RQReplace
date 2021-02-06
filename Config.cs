@@ -11,31 +11,31 @@ namespace RQReplace
     public class Config : AbstractConfigSection
     {
         [Description("Is this plugin enabled?")]
-        public bool IsEnabled = true;
+        public bool IsEnabled { get; set; } = true;
 
         [Description("Is this plugin enabled?")]
-        public string ReplaceBroadcast = "<b>[RQReplace] You have replaced a player!</b>";
+        public string ReplaceBroadcast { get; set; } = "<b>[RQReplace] You have replaced a player!</b>";
 
         [Description("Should ammo be transferred?")]
-        public bool AllowAmmoTransfer = true;
+        public bool AllowAmmoTransfer { get; set; } = true;
 
         [Description("Should the size be transferred?")]
-        public bool useScale = true;
+        public bool useScale { get; set; } = true;
 
         [Description("Should max health be transferred?")]
-        public bool useMaxHealth = true;
+        public bool useMaxHealth { get; set; } = true;
 
         [Description("Should HP be transferred?")]
-        public bool useHealth = true;
+        public bool useHealth { get; set; } = true;
 
         [Description("Should AHP be transferred?")]
-        public bool useAHP = true;
+        public bool useAHP { get; set; } = true;
 
         [Description("Should Stamina be transferred?")]
-        public bool useStamina = true;
+        public bool useStamina { get; set; } = true;
 
         [Description("Should the inventory be transferred?")]
-        public bool useInventory = true;
+        public bool useInventory { get; set; } = true;
 
     }
 }
