@@ -19,13 +19,14 @@ namespace RQReplace.Handlers
 
         public void onLeave(Synapse.Api.Events.SynapseEventArguments.PlayerLeaveEventArgs ev)
         {
-            if (Plugin.Config.IsEnabled && Map.Get.Round.RoundIsActive && Server.Get.Players.Count > 0)
+            if (Plugin.Config.IsEnabled && Map.Get.Round.RoundIsActive)
             {
                 //checks if the player is not a spectator
                 if (ev.Player.RoleType != RoleType.Spectator || ev.Player.RoleType != RoleType.None)
                 {
                     //this is a random player in the spectator
                     var players = RoleType.Spectator.GetPlayers().Where(x => x.OverWatch == false);
+                    if (players.Count() < 1) return;
                     var player = players.ElementAt(UnityEngine.Random.Range(0, players.Count()));
                     //here data from the player who left is saved
                     uint ammo5 = ev.Player.Ammo5;
