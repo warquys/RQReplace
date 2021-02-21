@@ -19,7 +19,7 @@ namespace RQReplace.Handlers
 
         public void onLeave(Synapse.Api.Events.SynapseEventArguments.PlayerLeaveEventArgs ev)
         {
-            if (Plugin.Config.IsEnabled)
+            if (Plugin.Config.IsEnabled && Map.Get.Round.RoundIsActive && Server.Get.Players.Count > 0)
             {
                 //checks if the player is not a spectator
                 if (ev.Player.RoleType != RoleType.Spectator || ev.Player.RoleType != RoleType.None)
@@ -39,17 +39,18 @@ namespace RQReplace.Handlers
                     Vector3 position = ev.Player.Position;
                     float stamina = ev.Player.Stamina;
                     Vector3 scale = ev.Player.Scale;
+                    var id = ev.Player.RoleID;
 
                     Timing.CallDelayed(1f, () =>
                     {
                         player.SendBroadcast(5, Plugin.Config.ReplaceBroadcast);
-                        player.RoleType = role;
+                        player.RoleID = id;
                         player.Position = position;
 
                         if (Plugin.Config.useScale)
                             player.Scale = scale;
 
-                        if (Plugin.Config.useScale)
+                        if (Plugin.Config.useMaxHealth)
                             player.MaxHealth = maxHP;
 
                         if (Plugin.Config.useHealth)
