@@ -28,7 +28,6 @@ namespace RQReplace.Handlers
                     var players = RoleType.Spectator.GetPlayers().Where(x => x.OverWatch == false);
                     var player = players.ElementAt(UnityEngine.Random.Range(0, players.Count()));
                     //here data from the player who left is saved
-                    RoleType role = ev.Player.RoleType;
                     uint ammo5 = ev.Player.Ammo5;
                     uint ammo7 = ev.Player.Ammo7;
                     uint ammo9 = ev.Player.Ammo9;
