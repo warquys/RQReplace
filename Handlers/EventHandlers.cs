@@ -22,7 +22,7 @@ namespace RQReplace.Handlers
             if (Plugin.Config.IsEnabled && Map.Get.Round.RoundIsActive)
             {
                 //checks if the player is not a spectator
-                if (ev.Player.RoleType != RoleType.Spectator || ev.Player.RoleType != RoleType.None)
+                if (ev.Player.RoleType != RoleType.Spectator && ev.Player.RoleType != RoleType.None && ev.Player.RoleID != (int)RoleType.Tutorial)
                 {
                     //this is a random player in the spectator
                     var players = RoleType.Spectator.GetPlayers().Where(x => x.OverWatch == false);
