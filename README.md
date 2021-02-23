@@ -24,9 +24,9 @@ Name  | Type | Default | Description
 `IsEnabled` | Boolean | true | Is this plugin enabled?
 `ReplaceBroadcast` | String | [RQReplace] You have replaced a player! | What is the broadcast a player gets when replacing an other one
 `AllowAmmoTransfer` | Boolean | true | Should ammo be transferred?
-`useScale` | Boolean | true | Should the size be transferred?
-`useMaxHealth` | Boolean | true | Should the max Health be transferred?
-`useHealth` | Boolean | true | Should Health be transferred?
-`useAHP` | Boolean | true | Should AHP be transferred?
-`useStamina` | Boolean | true | Should stamina be transferred?
-`useInventory` | Boolean | true | Should the Inventory be transferred?
+`UseScale` | Boolean | true | Should the size be transferred?
+`UseMaxHealth` | Boolean | true | Should the max Health be transferred?
+`UseHealth` | Boolean | true | Should Health be transferred?
+`UseAHP` | Boolean | true | Should AHP be transferred?
+`UseStamina` | Boolean | true | Should stamina be transferred?
+`UseInventory` | Boolean | true | Should the Inventory be transferred?
