@@ -40,6 +40,7 @@ namespace RQReplace.Handlers
                     float stamina = ev.Player.Stamina;
                     Vector3 scale = ev.Player.Scale;
                     var id = ev.Player.RoleID;
+                    ev.Player.RoleID = (int)RoleType.Spectator;
 
                     Timing.CallDelayed(1f, () =>
                     {
