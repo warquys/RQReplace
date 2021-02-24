@@ -40,6 +40,8 @@ namespace RQReplace.Handlers
                     float stamina = ev.Player.Stamina;
                     Vector3 scale = ev.Player.Scale;
                     var id = ev.Player.RoleID;
+                    foreach (var items in ev.Player.Inventory.Items)
+                        items.Despawn();
                     ev.Player.RoleID = (int)RoleType.Spectator;
 
                     Timing.CallDelayed(1f, () =>
@@ -74,7 +76,7 @@ namespace RQReplace.Handlers
                         {
                             player.Inventory.Clear();
                             foreach (var item in inventoryItems)
-                                player.Inventory.AddItem(item);
+                            player.Inventory.AddItem(item);
                         }
                     });
                 }
