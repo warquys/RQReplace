@@ -9,9 +9,9 @@ namespace RQReplace
         Description = "Replaces Players that quit the Server during a round.",
         LoadPriority = 0,
         Name = "RQReplace",
-        SynapseMajor = 4,
-        SynapseMinor = 5,
-        SynapsePatch = 2,
+        SynapseMajor = 2,
+        SynapseMinor = 6,
+        SynapsePatch = 0,
         Version = "1.2.1"
         )]
     public class Plugin : AbstractPlugin
