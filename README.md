@@ -6,6 +6,7 @@
 ## Features 
 * Replace players with an active role who leave the game 
 * Configure what aspects the replacer will have
+* SCPs will not cause a C.A.S.S.I.E Announcement when they leave and are replaced
 
 
 ## Showcase
