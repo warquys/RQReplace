@@ -13,9 +13,6 @@ namespace RQReplace
         [Description("Is this plugin enabled?")]
         public bool IsEnabled { get; set; } = true;
 
-        [Description("Is this plugin enabled?")]
-        public string ReplaceBroadcast { get; set; } = "<b>[RQReplace] You have replaced a player!</b>";
-
         [Description("Should ammo be transferred?")]
         public bool AllowAmmoTransfer { get; set; } = true;
 

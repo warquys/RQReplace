@@ -29,12 +29,14 @@ namespace RQReplace.Handlers
                     if (players.Count() < 1) return;
                     var player = players.ElementAt(UnityEngine.Random.Range(0, players.Count()));
                     //here data from the player who left is saved
-                    uint ammo5 = ev.Player.Ammo5;
-                    uint ammo7 = ev.Player.Ammo7;
-                    uint ammo9 = ev.Player.Ammo9;
+                    ushort ammoGauge = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo12gauge];
+                    ushort cal44 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo44cal];
+                    ushort ammo556 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo556x45];
+                    ushort ammo762 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo762x39];
+                    ushort ammo919 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo9x19];
                     float hp = ev.Player.Health;
                     int maxHP = ev.Player.MaxHealth;
-                    float ahp = ev.Player.ArtificialHealth;
+                    ushort ahp = ev.Player.ArtificialHP;
                     var inventoryItems = ev.Player.Inventory.Items;
                     Vector3 position = ev.Player.Position;
                     float stamina = ev.Player.Stamina;
@@ -46,7 +48,7 @@ namespace RQReplace.Handlers
 
                     Timing.CallDelayed(1f, () =>
                     {
-                        player.SendBroadcast(5, Plugin.Config.ReplaceBroadcast);
+                        player.SendBroadcast(5, $"<b><i>{Plugin.PluginTranslation.ActiveTranslation.ReplaceBroadcast}</i></b>");
                         player.RoleID = id;
                         player.Position = position;
 
@@ -60,16 +62,19 @@ namespace RQReplace.Handlers
                             player.Health = hp;
 
                         if (Plugin.Config.useAHP)
-                            player.ArtificialHealth = ahp;
+                            player.ArtificialHP = ahp;
 
                         if (Plugin.Config.useStamina)
                             player.Stamina = stamina;
 
                         if (Plugin.Config.AllowAmmoTransfer)
                         {
-                            player.Ammo5 = ammo5;
-                            player.Ammo7 = ammo7;
-                            player.Ammo9 = ammo9;
+                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo12gauge] = ammoGauge;
+                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo556x45] = ammo556;
+                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo44cal] = cal44;
+                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo762x39] = ammo762;
+                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo9x19] = ammo919;
+                            ;
                         }
 
                         if (Plugin.Config.useInventory)
