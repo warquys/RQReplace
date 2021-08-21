@@ -23,7 +23,6 @@
 Name  | Type | Default | Description
 ------------ | ------------ | ------------- | ------------ 
 `IsEnabled` | Boolean | true | Is this plugin enabled?
-`ReplaceBroadcast` | String | [RQReplace] You have replaced a player! | What is the broadcast a player gets when replacing an other one
 `AllowAmmoTransfer` | Boolean | true | Should ammo be transferred?
 `UseScale` | Boolean | true | Should the size be transferred?
 `UseMaxHealth` | Boolean | true | Should the max Health be transferred?
