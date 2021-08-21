@@ -13,6 +13,13 @@
 
 ![Some Information](/assets/info.png)
 
+## Supported Languages 
+* English
+* German
+
+## How to add new Languages
+You have to either dm me on Discord, then I can explain it to you or you just create a pull request. (My Discord Account: `TheVoidNebula#5090`)
+
 
 ## Installation
 1. [Install Synapse](https://github.com/SynapseSL/Synapse/wiki#hosting-guides)
