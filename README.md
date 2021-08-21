@@ -6,11 +6,19 @@
 ## Features 
 * Replace players with an active role who leave the game 
 * Configure what aspects the replacer will have
+* SCPs will not cause a C.A.S.S.I.E Announcement when they leave and are replaced
 
 
 ## Showcase
 
 ![Some Information](/assets/info.png)
+
+## Supported Languages 
+* English
+* German
+
+## How to add new Languages
+You have to either dm me on Discord, then I can explain it to you or you just create a pull request. (My Discord Account: `TheVoidNebula#5090`)
 
 
 ## Installation
@@ -22,7 +30,6 @@
 Name  | Type | Default | Description
 ------------ | ------------ | ------------- | ------------ 
 `IsEnabled` | Boolean | true | Is this plugin enabled?
-`ReplaceBroadcast` | String | [RQReplace] You have replaced a player! | What is the broadcast a player gets when replacing an other one
 `AllowAmmoTransfer` | Boolean | true | Should ammo be transferred?
 `UseScale` | Boolean | true | Should the size be transferred?
 `UseMaxHealth` | Boolean | true | Should the max Health be transferred?
