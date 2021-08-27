@@ -22,12 +22,12 @@ namespace RQReplace.Handlers
             if (Plugin.Config.IsEnabled && Map.Get.Round.RoundIsActive)
             {
                 //checks if the player is not a spectator
-                if (ev.Player.RoleType != RoleType.Spectator && ev.Player.RoleType != RoleType.None && ev.Player.RoleID != (int)RoleType.Tutorial)
+                if (ev.Player.RoleType != RoleType.Spectator && ev.Player.RoleType != RoleType.None && Plugin.Config.ReplaceRoles.Contains(ev.Player.RoleID))
                 {
                     //this is a random player in the spectator
                     var players = RoleType.Spectator.GetPlayers().Where(x => x.OverWatch == false);
                     if (players.Count() < 1) return;
-                    var player = players.ElementAt(UnityEngine.Random.Range(0, players.Count()));
+                    var player = players.ElementAt(Random.Range(0, players.Count()));
                     //here data from the player who left is saved
                     ushort ammoGauge = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo12gauge];
                     ushort cal44 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo44cal];
@@ -52,19 +52,19 @@ namespace RQReplace.Handlers
                         player.RoleID = id;
                         player.Position = position;
 
-                        if (Plugin.Config.useScale)
+                        if (Plugin.Config.UseScale)
                             player.Scale = scale;
 
-                        if (Plugin.Config.useMaxHealth)
+                        if (Plugin.Config.UseMaxHealth)
                             player.MaxHealth = maxHP;
 
-                        if (Plugin.Config.useHealth)
+                        if (Plugin.Config.UseHealth)
                             player.Health = hp;
 
-                        if (Plugin.Config.useAHP)
+                        if (Plugin.Config.UseAHP)
                             player.ArtificialHP = ahp;
 
-                        if (Plugin.Config.useStamina)
+                        if (Plugin.Config.UseStamina)
                             player.Stamina = stamina;
 
                         if (Plugin.Config.AllowAmmoTransfer)
@@ -77,7 +77,7 @@ namespace RQReplace.Handlers
                             ;
                         }
 
-                        if (Plugin.Config.useInventory)
+                        if (Plugin.Config.UseInventory)
                         {
                             player.Inventory.Clear();
                             foreach (var item in inventoryItems)

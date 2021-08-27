@@ -13,7 +13,7 @@ namespace RQReplace
         SynapseMajor = 2,
         SynapseMinor = 7,
         SynapsePatch = 0,
-        Version = "2.0"
+        Version = "2.1.0"
         )]
     public class Plugin : AbstractPlugin
     {
@@ -29,8 +29,14 @@ namespace RQReplace
 
             PluginTranslation.AddTranslation(new PluginTranslation
             {
-                ReplaceBroadcast = "<b>Du hast einen Spieler ersetzt!</b>",
+                ReplaceBroadcast = "<b><i>Du hast einen Spieler ersetzt!</i></b>",
             }, "GERMAN");
+
+            PluginTranslation.AddTranslation(new PluginTranslation
+            {
+                ReplaceBroadcast = "<b><i>Vous avez remplacé un Joueur!</i></b>",
+        }, "FRENCH");
+
             //Feel free to ask me or create a PR in order to add more languages
             new EventHandlers();
         }
