@@ -7,6 +7,7 @@
 * Replace players with an active role who leave the game 
 * Configure what aspects the replacer will have
 * SCPs will not cause a C.A.S.S.I.E Announcement when they leave and are replaced
+* Decide which roles will be replaced
 
 
 ## Showcase
@@ -37,3 +38,4 @@ Name  | Type | Default | Description
 `UseAHP` | Boolean | true | Should AHP be transferred?
 `UseStamina` | Boolean | true | Should stamina be transferred?
 `UseInventory` | Boolean | true | Should the Inventory be transferred?
+`ReplaceRoles` | List | 5, 7, 9, 3, 0, 16, 17 | Which Roles should be replaced? (Use the RoleIDs, for more information see the Synapse RoleIDs)
