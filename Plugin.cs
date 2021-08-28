@@ -13,7 +13,7 @@ namespace RQReplace
         SynapseMajor = 2,
         SynapseMinor = 7,
         SynapsePatch = 0,
-        Version = "2.1.0"
+        Version = "2.1.1"
         )]
     public class Plugin : AbstractPlugin
     {
