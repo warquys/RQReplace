@@ -17,6 +17,7 @@
 ## Supported Languages 
 * English
 * German
+* French (By `nath256#8390`)
 
 ## How to add new Languages
 You have to either dm me on Discord, then I can explain it to you or you just create a pull request. (My Discord Account: `TheVoidNebula#5090`)
