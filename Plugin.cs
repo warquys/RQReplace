@@ -35,7 +35,12 @@ namespace RQReplace
             PluginTranslation.AddTranslation(new PluginTranslation
             {
                 ReplaceBroadcast = "<b><i>Vous avez remplacé un Joueur!</i></b>",
-        }, "FRENCH");
+            }, "FRENCH");
+
+            PluginTranslation.AddTranslation(new PluginTranslation
+            {
+                ReplaceBroadcast = "<b><i>Właśnie zastąpiłeś jednego z graczy!</i></b>",
+            }, "POLISH");
 
             //Feel free to ask me or create a PR in order to add more languages
             new EventHandlers();
