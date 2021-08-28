@@ -9,7 +9,6 @@
 * SCPs will not cause a C.A.S.S.I.E Announcement when they leave and are replaced
 * Decide which roles will be replaced
 
-
 ## Showcase
 
 ![Some Information](/assets/info.png)
@@ -23,11 +22,65 @@
 ## How to add new Languages
 You have to either dm me on Discord, then I can explain it to you or you just create a pull request. (My Discord Account: `TheVoidNebula#5090`)
 
-
 ## Installation
 1. [Install Synapse](https://github.com/SynapseSL/Synapse/wiki#hosting-guides)
 2. Place the RQReplace.dll file that you can download [here](https://github.com/TheVoidNebula/RQReplace/releases) in your plugin directory
 3. Restart/Start your server.
+
+## Role IDs
+
+<details>
+<summary>SCPs</summary>
+
+| Name | ID |
+| --- | --- |
+| SCP-049 | 5 |
+| SCP-049-2 | 10 |
+| SCP-079 | 7 |
+| SCP-096 | 9 |
+| SCP-106 | 3 |
+| SCP-173 | 0 |
+| SCP-939-53 | 16 |
+| SCP-939-89 | 17 |
+ 
+</details>
+
+<details>
+<summary>MTF</summary>
+
+| Name | ID |
+| --- | --- |
+| Guard | 15 |
+| Private | 13 |
+| Sergeant | 11 |
+| Captain | 12 |
+| Specialist | 4 |
+ 
+</details>
+
+<details>
+<summary>Chaos Insurgency</summary>
+
+| Name | ID |
+| --- | --- |
+| Conscript | 8 |
+| Rifleman | 18 |
+| Repressor | 19 |
+| Marauder | 20 |
+ 
+</details>
+
+<details>
+<summary>Other</summary>
+
+| Name | ID |
+| --- | --- |
+| Spectator | 2 |
+| Tutorial | 14 |
+| Class-D | 1 |
+| Scientist | 6 |
+ 
+</details>
 
 ## Config
 Name  | Type | Default | Description
