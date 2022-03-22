@@ -1,10 +1,6 @@
 ﻿using Synapse.Config;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RQReplace
 {
@@ -33,6 +29,9 @@ namespace RQReplace
 
         [Description("Should the inventory be transferred?")]
         public bool UseInventory { get; set; } = true;
+
+        [Description("Should replace only the roles in ReplaceRoles?")]
+        public bool ReplaceOnlyList = true;
 
         [Description("Which Roles should be replaced?")]
         public List<int> ReplaceRoles { get; set; } = new List<int>()

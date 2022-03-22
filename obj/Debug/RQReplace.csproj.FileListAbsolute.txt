@@ -1,0 +1,17 @@
+H:\Dev\SCP SL\Synapse\RQReplace\obj\Debug\RQReplace.csproj.AssemblyReference.cache
+H:\Dev\SCP SL\Synapse\RQReplace\obj\Debug\RQReplace.csproj.CoreCompileInputs.cache
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\RQReplace.dll.config
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\RQReplace.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\RQReplace.pdb
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\Assembly-CSharp-firstpass.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\Assembly-CSharp.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\Mirror.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\Synapse.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\System.Buffers.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\System.Memory.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\UnityEngine.CoreModule.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\UnityEngine.dll
+H:\Dev\SCP SL\Synapse\RQReplace\bin\Debug\UnityEngine.PhysicsModule.dll
+H:\Dev\SCP SL\Synapse\RQReplace\obj\Debug\RQReplace.csproj.CopyComplete
+H:\Dev\SCP SL\Synapse\RQReplace\obj\Debug\RQReplace.dll
+H:\Dev\SCP SL\Synapse\RQReplace\obj\Debug\RQReplace.pdb

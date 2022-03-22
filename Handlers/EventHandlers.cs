@@ -1,7 +1,10 @@
-﻿using GameCore;
-using MEC;
+﻿using MEC;
 using Synapse;
 using Synapse.Api;
+using Synapse.Api.Enum;
+using Synapse.Api.Events.SynapseEventArguments;
+using Synapse.Api.Items;
+using Synapse.Api.Roles;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,82 +13,113 @@ namespace RQReplace.Handlers
 {
     class EventHandlers
     {
+        private Player _player;
+        private int? _id;
+        
+        private Vector3 _postion;
+        private float _roation;
+
+        private Vector3? _scale;
+        private float? _maxHealth;
+        private float? _health;
+        private float? _artificialHealth;
+        private int? _maxArtificialHealth;
+        private float? _stamina;
+        private Dictionary<AmmoType, ushort> _ammo;
+        private List<SynapseItem> _items;
 
         public EventHandlers()
         {
-            Server.Get.Events.Player.PlayerLeaveEvent += onLeave;
+            Server.Get.Events.Player.PlayerLeaveEvent += OnLeave;
+            Server.Get.Events.Player.PlayerSetClassEvent += OnSetClass;
         }
 
-
-        public void onLeave(Synapse.Api.Events.SynapseEventArguments.PlayerLeaveEventArgs ev)
+        private void OnSetClass(PlayerSetClassEventArgs ev)
         {
-            if (Plugin.Config.IsEnabled && Map.Get.Round.RoundIsActive)
+            if (ev.Player == _player && (
+                (RoleManager.HighestRole < _id  && ev.Player.RoleID == _id) || 
+                (RoleManager.HighestRole >= _id && (int)ev.Role == _id)))
             {
-                //checks if the player is not a spectator
-                if (ev.Player.RoleType != RoleType.Spectator && ev.Player.RoleType != RoleType.None && Plugin.Config.ReplaceRoles.Contains(ev.Player.RoleID))
+                _id     = null; 
+                _player = null;
+                
+                ev.Position = _postion;
+                ev.Rotation = _roation;
+                
+                if (_items != null) ev.Items = _items; _items = null;
+                if (_ammo != null)  ev.Ammo = _ammo;    _ammo = null;
+                
+                Timing.CallDelayed(0.2f, () =>
                 {
-                    //this is a random player in the spectator
-                    var players = RoleType.Spectator.GetPlayers().Where(x => x.OverWatch == false);
-                    if (players.Count() < 1) return;
-                    var player = players.ElementAt(Random.Range(0, players.Count()));
-                    //here data from the player who left is saved
-                    ushort ammoGauge = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo12gauge];
-                    ushort cal44 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo44cal];
-                    ushort ammo556 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo556x45];
-                    ushort ammo762 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo762x39];
-                    ushort ammo919 = ev.Player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo9x19];
-                    float hp = ev.Player.Health;
-                    int maxHP = ev.Player.MaxHealth;
-                    ushort ahp = ev.Player.ArtificialHP;
-                    var inventoryItems = ev.Player.Inventory.Items;
-                    Vector3 position = ev.Player.Position;
-                    float stamina = ev.Player.Stamina;
-                    Vector3 scale = ev.Player.Scale;
-                    var id = ev.Player.RoleID;
-                    foreach (var items in ev.Player.Inventory.Items)
-                        items.Despawn();
-                    ev.Player.RoleID = (int)RoleType.Spectator;
-
-                    Timing.CallDelayed(1f, () =>
-                    {
-                        player.SendBroadcast(5, $"<b><i>{Plugin.PluginTranslation.ActiveTranslation.ReplaceBroadcast}</i></b>");
-                        player.RoleID = id;
-                        player.Position = position;
-
-                        if (Plugin.Config.UseScale)
-                            player.Scale = scale;
-
-                        if (Plugin.Config.UseMaxHealth)
-                            player.MaxHealth = maxHP;
-
-                        if (Plugin.Config.UseHealth)
-                            player.Health = hp;
-
-                        if (Plugin.Config.UseAHP)
-                            player.ArtificialHP = ahp;
-
-                        if (Plugin.Config.UseStamina)
-                            player.Stamina = stamina;
-
-                        if (Plugin.Config.AllowAmmoTransfer)
-                        {
-                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo12gauge] = ammoGauge;
-                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo556x45] = ammo556;
-                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo44cal] = cal44;
-                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo762x39] = ammo762;
-                            player.AmmoBox[Synapse.Api.Enum.AmmoType.Ammo9x19] = ammo919;
-                            ;
-                        }
-
-                        if (Plugin.Config.UseInventory)
-                        {
-                            player.Inventory.Clear();
-                            foreach (var item in inventoryItems)
-                            player.Inventory.AddItem(item);
-                        }
-                    });
-                }
+                    if (ev.Player == null) return;
+                    //set the value   check if is def                   set the value if is def                      set save value to not def
+                    if (_maxArtificialHealth != null)   ev.Player.MaxArtificialHealth = _maxArtificialHealth.Value; _maxArtificialHealth = null;
+                    if (_artificialHealth != null)      ev.Player.ArtificialHealth = _artificialHealth.Value;       _artificialHealth = null;
+                    if (_maxHealth != null)             ev.Player.MaxHealth = _maxHealth.Value;                     _maxHealth = null;
+                    if (_health != null)                ev.Player.Health = _health.Value;                           _health = null;
+                    if (_stamina != null)               ev.Player.Stamina = _stamina.Value;                         _stamina = null;
+                    if (_scale != null)                 ev.Player.Scale = _scale.Value;                             _scale = null;
+                });
             }
+        }
+
+        public void OnLeave(Synapse.Api.Events.SynapseEventArguments.PlayerLeaveEventArgs ev)
+        {
+            if (!Plugin.Config.IsEnabled || !Map.Get.Round.RoundIsActive)
+                return;
+
+            //checks if the player is not a spectator
+            if (ev.Player.RoleType != RoleType.Spectator && ev.Player.RoleType != RoleType.None && 
+                (!Plugin.Config.ReplaceOnlyList || Plugin.Config.ReplaceRoles.Contains(ev.Player.RoleID)))
+            {
+                //this is a random player in the spectator
+                var players = RoleType.Spectator.GetPlayers().Where(x => !x.OverWatch);
+                if (!players.Any()) return;
+                var player = players.ElementAt(Random.Range(0, players.Count()));
+
+                player.SendBroadcast(5, $"{Plugin.PluginTranslation.ActiveTranslation.ReplaceBroadcast}");
+
+                //get value
+
+                _id = player.RoleID = ev.Player.RoleID;
+                _postion = ev.Player.Position;
+                _roation = ev.Player.Rotation.x;
+
+                if (Plugin.Config.UseScale)
+                    _scale = ev.Player.Scale;
+
+                if (Plugin.Config.UseMaxHealth)
+                    _maxHealth = ev.Player.MaxHealth;
+
+                if (Plugin.Config.UseHealth)
+                    _health = ev.Player.Health;
+
+                if (Plugin.Config.UseAHP)
+                    _artificialHealth = ev.Player.ArtificialHealth;
+
+                if (Plugin.Config.UseStamina)
+                    _stamina = ev.Player.Stamina;
+
+                if (Plugin.Config.AllowAmmoTransfer)
+                {
+                    _ammo = new Dictionary<AmmoType, ushort>();
+                    foreach (AmmoType ammoType in (AmmoType[])System.Enum.GetValues(typeof(AmmoType)))
+                        _ammo[ammoType] = ev.Player.AmmoBox[ammoType];
+                }
+
+                if (Plugin.Config.UseInventory)
+                {
+                    _items = new List<SynapseItem>();
+                    foreach (var item in ev.Player.Inventory.Items)
+                    {
+                        item.Despawn();
+                        _items.Add(item);
+                    }
+                }
+
+                ev.Player.RoleID = (int)RoleType.Spectator;
+            }
+            
 		}
 	} 
 }
